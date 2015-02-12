@@ -1,0 +1,29 @@
+GIT
+  remote: git://github.com/theodi/jiffybag.git
+  revision: 664e9f96335acfcc1240d8f3f4c41e3e33ab56c1
+  specs:
+    jiffybag (1.0.0)
+      dotenv (~> 1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
+    columnize (0.9.0)
+    debugger-linecache (1.2.0)
+    dotenv (1.0.2)
+    httpclient (2.4.0)
+    nationbuilder-rb (1.1.0)
+      httpclient (~> 2.4.0)
+    slop (3.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  byebug
+  jiffybag!
+  nationbuilder-rb

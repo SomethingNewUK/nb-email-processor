@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+- 2.2.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: MqkJB4Bvp/XrJfCnP04fR4IS+sg5eOti/NvbRNlXj3A1QUVcirA9o4lumQpbx8xhzarcZhqjyorGH57dIXyNcueL2zmGcBL3KWXZr3+udriOclSxzW0pVFZ3QPbFL1Ra7jgH84eqA2GwRrWGOuAInjcOrLUHIioLLGjczrBvGps=
+  app: nb-email-processor
+  on:
+    repo: SomethingNewUK/nb-email-processor

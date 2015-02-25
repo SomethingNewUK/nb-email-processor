@@ -19,8 +19,6 @@ require 'nationbuilder'
 
 nb = NationBuilder::Client.new(JiffyBag['NATIONBUILDER_NATION'], JiffyBag['NATIONBUILDER_API_KEY'])
 
-taggings = YAML.load_file('tags.yml')
-
 include Capybara
 
 Capybara.register_driver :poltergeist do |app|
@@ -60,20 +58,9 @@ followups.each do |href|
     link.click
     sleep(2)
     body = first(:css, ".email-body-text")
-    
-    
-    tags = []
-    taggings.each_pair do |key, value|
-      if body.text.match value
-        tags << key
-      end
-    end
-    unless tags.empty?
-      puts "Tagging user #{id} with #{tags.inspect}"
-      nb.call(:people, :tag_person, id: id.to_i, tagging: { tag: tags })
-    end
-    
-    
+
+    # Tag appropriately
+    apply_tags(nb, body.text, id, tags)    
     
     # Set address
     set_address(nb, body.html, id)

@@ -5,6 +5,9 @@ Bundler.require
 require 'capybara/poltergeist'
 require 'httparty'
 
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__), "lib")
+require 'nb-email-processor'
+
 JiffyBag.configure %w{
   NATIONBUILDER_NATION
   NATIONBUILDER_API_KEY
@@ -49,8 +52,6 @@ loop do
   followups.concat page_followups
 end
 
-re = /y,\n.*?\n(.*[0-9]{2}[A-Z]{2})\n/m
-
 followups.each do |href|
   id = href.split('/').last
   visit "https://#{JiffyBag['NATIONBUILDER_NATION']}.nationbuilder.com#{href}"
@@ -59,6 +60,7 @@ followups.each do |href|
     link.click
     sleep(2)
     body = first(:css, ".email-body-text")
+    
     
     tags = []
     taggings.each_pair do |key, value|
@@ -70,11 +72,14 @@ followups.each do |href|
       puts "Tagging user #{id} with #{tags.inspect}"
       nb.call(:people, :tag_person, id: id.to_i, tagging: { tag: tags })
     end
+    
+    
+    
     if nb.call(:people, :show, id: id.to_i)['person']['home_address'].nil?
-      match = body.html.match re
-      if match
+      addr = find_address(body.html)
+      if addr
         parsed_address = JSON.parse(HTTParty.post('https://sorting-office.openaddressesuk.org/address', 
-          :query => { :address => match[1] }).body)
+          :query => { :address => addr }).body)
         paon = [parsed_address['paon'], parsed_address['street']].join(' ')
         address = {
           address1: parsed_address['saon'] || paon ,

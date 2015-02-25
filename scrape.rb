@@ -20,10 +20,10 @@ website.followups.each do |id|
     email_body = email_body.native.command(:all_text)
 
     # Assign
-    #assign(nb, email_body, id)
+    assign(nb, email_body, id)
 
     # Tag appropriately
-    #apply_tags(nb, email_body, id)    
+    apply_tags(nb, email_body, id)    
     
     # Set address
     set_address(nb, email_body, id)

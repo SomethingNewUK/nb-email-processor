@@ -75,23 +75,9 @@ followups.each do |href|
     
     
     
-    if nb.call(:people, :show, id: id.to_i)['person']['home_address'].nil?
-      addr = find_address(body.html)
-      if addr
-        parsed_address = JSON.parse(HTTParty.post('https://sorting-office.openaddressesuk.org/address', 
-          :query => { :address => addr }).body)
-        paon = [parsed_address['paon'], parsed_address['street']].join(' ')
-        address = {
-          address1: parsed_address['saon'] || paon ,
-          address2: parsed_address['saon'].nil? ? parsed_address['locality'] : paon,
-          address3: parsed_address['saon'].nil? ? nil : parsed_address['locality'],
-          city: parsed_address['town'],
-          zip: parsed_address['postcode']
-        }
-        puts "Storing address for user #{id}: #{address.to_json.inspect}"
-        nb.call(:people, :update, id: id.to_i, person: {home_address: address})
-      end
-    end
+    # Set address
+    set_address(nb, body.html, id)
+
     # Manually hit the save button on addresses to make auto-districting happen
     visit "https://#{JiffyBag['NATIONBUILDER_NATION']}.nationbuilder.com/admin/signups/#{id}/addresses/home"
     click_on "Save address"

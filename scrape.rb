@@ -52,12 +52,17 @@ end
 
 followups.each do |href|
   id = href.split('/').last
+  puts "processing person #{id}"
+
   visit "https://#{JiffyBag['NATIONBUILDER_NATION']}.nationbuilder.com#{href}"
   link = first(:css, ".show-email-body")
   if link
     link.click
     sleep(2)
     body = first(:css, ".email-body-text")
+
+    # Assign
+    assign(nb, body.text, id)
 
     # Tag appropriately
     apply_tags(nb, body.text, id)    

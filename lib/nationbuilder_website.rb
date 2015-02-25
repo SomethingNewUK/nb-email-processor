@@ -29,7 +29,7 @@ class NationbuilderWebsite
     arr = []
     page = 1
     loop do
-      visit "https://#{JiffyBag['NATIONBUILDER_NATION']}.nationbuilder.com/admin/streams/your_followups?page=#{page}"
+      visit "https://#{JiffyBag['NATIONBUILDER_NATION']}.nationbuilder.com/admin/streams/followups?page=#{page}"
       page += 1
       page_followups = all(:css, ".followup-content a.full-name").map { |x| x[:href].split('/').last }
       break if page_followups.count == 0

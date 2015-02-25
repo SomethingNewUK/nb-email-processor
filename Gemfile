@@ -6,6 +6,7 @@ gem "jiffybag", github: 'theodi/jiffybag'
 gem "capybara"
 gem "poltergeist"
 gem "httparty"
+gem "activesupport"
 
 group :development, :test do
   gem "travis"

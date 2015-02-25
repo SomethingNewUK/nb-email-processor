@@ -1,4 +1,5 @@
 require 'httparty'
+require 'active_support/all'
 
 def set_address(nb, text, id)
   existing_address = nb.call(:people, :show, id: id.to_i)['person']['home_address']
@@ -7,13 +8,13 @@ def set_address(nb, text, id)
     if addr
       parsed_address = JSON.parse(HTTParty.post('https://sorting-office.openaddressesuk.org/address', 
         :query => { :address => addr }).body)
-      paon = [parsed_address['paon'], parsed_address['street']].join(' ')
+      paon = [parsed_address['paon'].try(:[], 'name'), parsed_address['street'].try(:[], 'name')].join(' ')
       address = {
-        address1: parsed_address['saon'] || paon ,
-        address2: parsed_address['saon'].nil? ? parsed_address['locality'] : paon,
-        address3: parsed_address['saon'].nil? ? nil : parsed_address['locality'],
-        city: parsed_address['town'],
-        zip: parsed_address['postcode']
+        address1: parsed_address['saon'].try(:[], 'name') || paon ,
+        address2: parsed_address['saon'].nil? ? parsed_address['locality'].try(:[], 'name') : paon,
+        address3: parsed_address['saon'].nil? ? nil : parsed_address['locality'].try(:[], 'name'),
+        city: parsed_address['town'].try(:[], 'name'),
+        zip: parsed_address['postcode'].try(:[], 'name')
       }
       puts "Storing address for user #{id}: #{address.to_json.inspect}"
       nb.call(:people, :update, id: id.to_i, person: {home_address: address})

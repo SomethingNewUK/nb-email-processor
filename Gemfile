@@ -12,4 +12,5 @@ group :development, :test do
   gem "byebug"
   gem "launchy"
   gem "rspec", "~> 3.0"
+  gem "coveralls"
 end

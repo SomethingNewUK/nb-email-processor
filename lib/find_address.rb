@@ -1,5 +1,8 @@
+require 'httparty'
+
 def set_address(nb, text, id)
-  if nb.call(:people, :show, id: id.to_i)['person']['home_address'].nil?
+  existing_address = nb.call(:people, :show, id: id.to_i)['person']['home_address']
+  if existing_address.nil? || existing_address.all?{|x| x[1]==nil || x[1]==""}
     addr = find_address(text)
     if addr
       parsed_address = JSON.parse(HTTParty.post('https://sorting-office.openaddressesuk.org/address', 
@@ -21,7 +24,7 @@ end
 
 def find_address(text)
   # Terrible multi-line regexp
-  re = /[ys],\n+.*?\n(.*[A-Za-z]{2}[0-9]{1,2} ?[0-9]{1}[A-Za-z]{2})\n/m
+  re = /[ys],\s*\n+.*?\n(.*[A-Za-z]{2}[0-9]{1,2} ?[0-9]{1}[A-Za-z]{2})\s*\n/m
   match = text.match re
   match ? match[1] : nil
 end

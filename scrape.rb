@@ -60,7 +60,7 @@ followups.each do |href|
     body = first(:css, ".email-body-text")
 
     # Tag appropriately
-    apply_tags(nb, body.text, id, tags)    
+    apply_tags(nb, body.text, id)    
     
     # Set address
     set_address(nb, body.html, id)

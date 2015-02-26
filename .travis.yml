@@ -8,3 +8,9 @@ deploy:
   app: nb-email-processor
   on:
     repo: SomethingNewUK/nb-email-processor
+env:
+  global:
+    - NATIONBUILDER_NATION=somethingnew
+    - NATIONBUILDER_API_KEY=sjklfjdkslfjkdlsfds
+    - NATIONBUILDER_USERNAME=test@example.com
+    - NATIONBUILDER_PASSWORD=fdsfjkdlsjflds

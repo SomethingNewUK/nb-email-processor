@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'byebug'
 
 # Load everything
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__), "lib")

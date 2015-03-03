@@ -13,10 +13,9 @@ website = NationbuilderWebsite.new
 website.followups.each do |id|
   puts "processing person #{id}"
   
-  email_body = website.email_body(id)
+  emails = website.emails(id)
   
-  if email_body
-    email_body = email_body.native.command(:all_text)
+  emails.each do |email_body|
 
     # Assign
     assign(nb, email_body, id)

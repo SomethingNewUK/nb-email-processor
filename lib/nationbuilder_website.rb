@@ -38,16 +38,15 @@ class NationbuilderWebsite
     arr
   end
   
-  def email_body(id)
+  def emails(id)
     visit "https://#{JiffyBag['NATIONBUILDER_NATION']}.nationbuilder.com/admin/signups/#{id}"
-    link = first(:css, ".show-email-body")
-    if link
+    links = all(:css, ".show-email-body")
+    links.each do |link|
       link.click
-      sleep(2)
-      first(:css, ".email-body-text")
-    else
-      nil
     end
+    sleep(2)
+    email_bodies = all(:css, ".email-body-text")
+    email_bodies.map {|x| x.native.command(:all_text)}
   end
 
   def geolocate(id)

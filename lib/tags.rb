@@ -5,9 +5,11 @@ end
 def apply_tags(nb, text, id)
 
   tags = []
-  taggings.each_pair do |key, value|
-    if text.match value
-      tags << key
+  taggings.each_pair do |key, array|
+    array.each do |value|
+      if text.match value
+        tags << key
+      end
     end
   end
   unless tags.empty?

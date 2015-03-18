@@ -1,11 +1,26 @@
-hsbc-tax-dodging-38-degrees: "HSBC has been helping the super-rich dodge their tax"
-tax-dodging-bill: "I am supporting the Tax Dodging Bill Campaign"
-cancer-research-uk: "Cancer Research UK would like to give"
-mind-concordat: "Mental Health Crisis Care Concordat declaration"
-age-uk-warm-homes: "Age UK’s campaign for warm homes"
-ambitious-about-autism: "Ambitious about Autism is the national charity for children"
-compassion-in-world-farming: "Compassion in World Farming has produced a Charter"
-cross-cancer-out: "Can I count on you, as my potential future MP, to Cross Cancer Out?"
-ttip-38-degrees: "worried about the effect of TTIP"
-league-against-cruel-sports: "I am contacting you to ask you to support the League’s five animal welfare calls"
-a-stitch-in-time: "A Stitch in Time"
+hsbc-tax-dodging-38-degrees: 
+  - "HSBC has been helping the super-rich dodge their tax"
+tax-dodging-bill:
+  - "I am supporting the Tax Dodging Bill Campaign"
+cancer-research-uk:
+  - "Cancer Research UK would like to give"
+mind-concordat: 
+  - "Mental Health Crisis Care Concordat declaration"
+age-uk-warm-homes: 
+  - "Age UK’s campaign for warm homes"
+ambitious-about-autism: 
+  - "Ambitious about Autism is the national charity for children"
+compassion-in-world-farming: 
+  - "Compassion in World Farming has produced a Charter"
+cross-cancer-out: 
+  - "Can I count on you, as my potential future MP, to Cross Cancer Out?"
+ttip-38-degrees: 
+  - "worried about the effect of TTIP"
+league-against-cruel-sports: 
+  - "I am contacting you to ask you to support the League’s five animal welfare calls"
+a-stitch-in-time: 
+  - "A Stitch in Time"
+nhs:
+  - "Please could you tell me where you stand on the NHS, so I can make an informed choice when I decide how to vote?"
+  - "I want privatisation reversed and the NHS protected as a public service"
+  - "Would you vote to stop NHS contracts going to private companies?"

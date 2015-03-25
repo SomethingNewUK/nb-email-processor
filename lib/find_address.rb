@@ -20,6 +20,8 @@ def set_address(nb, text, id)
       nb.call(:people, :update, id: id.to_i, person: {home_address: address})
     end
   end
+rescue JSON::ParserError
+  puts "JSON parse failed for when setting address for user #{id}"
 end
 
 

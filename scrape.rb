@@ -10,23 +10,30 @@ nb = NationBuilder::Client.new(JiffyBag['NATIONBUILDER_NATION'], JiffyBag['NATIO
 website = NationbuilderWebsite.new
 
 # Process all email followups
-website.followups.each do |id|
-  puts "processing person #{id}"
-  
-  emails = website.emails(id)
-  
-  emails.each do |email_body|
-
-    # Assign
-    assign(nb, email_body, id)
-
-    # Tag appropriately
-    apply_tags(nb, email_body, id)    
+followups = website.followups
+# Print list
+puts followups
+# Process each one
+followups.each do |id|
+  begin
+    puts "processing person #{id}"
     
-    # Set address
-    set_address(nb, email_body, id)
+    emails = website.emails(id)
     
-    # Make geolocation happen
-    website.geolocate(id)
+    # Assign to the first email only for people who mail multiple contacts
+    assign(nb, emails.first, id)
+
+    emails.each do |email_body|
+      # Tag appropriately
+      apply_tags(nb, email_body, id)    
+      
+      # Set address
+      set_address(nb, email_body, id)
+      
+      # Make geolocation happen
+      website.geolocate(id)        
+    end
+  rescue => ex
+    puts ex.message
   end
 end

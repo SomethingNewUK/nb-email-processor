@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "2.2.0"
+
 gem "rake"
 gem "nationbuilder-rb"
 gem "jiffybag", github: 'theodi/jiffybag'
@@ -8,10 +10,8 @@ gem "poltergeist"
 gem "httparty"
 gem "activesupport"
 
-group :development, :test do
-  gem "travis"
-  gem "byebug"
-  gem "launchy"
-  gem "rspec", "~> 3.0"
-  gem "coveralls"
-end
+gem "travis"
+gem "byebug"
+gem "launchy"
+gem "rspec", "~> 3.0"
+gem "coveralls"

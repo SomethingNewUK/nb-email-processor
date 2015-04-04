@@ -16,6 +16,8 @@ def set_address(nb, text, id)
     else
       puts "Couldn't find address for user #{id}"
     end
+  else
+    puts "Skipping address for user #{id}"
   end
 end
 

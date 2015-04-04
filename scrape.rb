@@ -12,7 +12,7 @@ website = NationbuilderWebsite.new
 # Process all email followups
 followups = website.followups
 # Print list
-puts followups
+puts "Processing #{followups.count} followups"
 # Process each one
 followups.each do |id|
   begin

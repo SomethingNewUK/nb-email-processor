@@ -36,7 +36,7 @@ class NationbuilderWebsite
       break if page_followups.count == 0
       arr.concat page_followups
     end
-    arr
+    arr.shuffle
   end
   
   def emails(id)

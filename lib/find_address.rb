@@ -30,6 +30,7 @@ def find_address(text)
 end
 
 def parse_address(addr)
+  postcode = addr.split("\n").last
   begin
     parsed_address = JSON.parse(HTTParty.post('https://sorting-office.openaddressesuk.org/address', 
       :query => { :address => addr }).body)
@@ -39,13 +40,13 @@ def parse_address(addr)
       address2: parsed_address['saon'].nil? ? parsed_address['locality'].try(:[], 'name') : paon,
       address3: parsed_address['saon'].nil? ? nil : parsed_address['locality'].try(:[], 'name'),
       city: parsed_address['town'].try(:[], 'name'),
-      zip: parsed_address['postcode'].try(:[], 'name')
+      zip: parsed_address['postcode'].try(:[], 'name') || postcode #fallback
     }
   rescue JSON::ParserError    
     puts "JSON parse failed when parsing #{addr}"
     # We know there's a postcode, so just use that
     address = {
-      zip: addr.split("\n").last
+      zip: postcode
     }
   end
 end
